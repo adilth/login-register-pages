@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <style type="text/css" media="screen">
+      body {
+         background-color: #111;
+         color: white;
+         text-decoration-color: white;
+         font-size: 1.1rem;
+         text-align: center;
+      }
+
+      #email {
+         margin: .8em 0;
+      }
+
+      input {
+         padding: .6em;
+         background-color: rgb(78, 78, 78);
+         border: none;
+         color: #cfcfcf;
+      }
+
+      ::placeholder {
+         color: rgb(175, 175, 175);
+      }
+
+      button {
+         margin-top: 1em;
+         background-color: rgb(32, 187, 120);
+         padding: .6em .9em;
+         font-size: 1rem;
+         border: none;
+         border-radius: 5px;
+         color: #f4f4f4;
+      }
+   </style>
+   <title>register page</title>
+</head>
+
+<body>
+   <h1>register</h1>
+   <form action="/register" method="POST">
+      <div>
+         <label for="name">Name</label>
+         <input type="text" id="name" name="name" placeholder="john" required>
+      </div>
+      <div>
+         <label for="email">Email</label>
+         <input type="email" id="email" name="email" placeholder="email@example.com" required>
+      </div>
+      <div>
+         <label for="password">Password</label>
+         <input type="password" id="password" name="password" requiredd>
+      </div>
+      <button type="submit">Register</button>
+   </form>
+   <p>if have an accunt click <a href="/login">here</a> to Login</p>
+
+</body>
+
+</html>
