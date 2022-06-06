@@ -1,7 +1,7 @@
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
-//laibraries
+//dependencies
 const express = require("express");
 const app = express();
 const bcrypt = require("bcrypt");
@@ -9,8 +9,10 @@ const passport = require("passport");
 const flash = require("express-flash");
 const session = require("express-session");
 const methodOverride = require("method-override");
-
+// const port = process.env.PORT || 8000;
+const cors = require("cors");
 const initializePassport = require("./passport-config");
+
 initializePassport(
   passport,
   (email) => users.find((user) => user.email === email),
@@ -18,10 +20,14 @@ initializePassport(
 );
 const users = [];
 
+// ========================
+// Middlewares
+// ========================
 app.set("view-engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 app.use(flash());
+app.use(cors());
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -34,6 +40,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride("_method"));
 
+// ========================
+// Routes
+// ========================
 app.get("/", ckeckAuthentication, (req, res) => {
   res.render("index.ejs", { name: req.user.name });
 });
@@ -77,6 +86,10 @@ app.delete("/logout", function (req, res, next) {
     res.redirect("/login");
   });
 });
+
+// ========================
+// Authenticated
+// ========================
 function ckeckAuthentication(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
@@ -90,4 +103,7 @@ function ckeckNotAuthentication(req, res, next) {
   }
   next();
 }
-app.listen(8000);
+// ========================
+// Listen
+// ========================
+app.listen(8000, () => console.log("it's running"));
